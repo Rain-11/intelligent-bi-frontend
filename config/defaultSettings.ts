@@ -16,9 +16,9 @@ const Settings: ProLayoutProps & {
   fixSiderbar: true,
   colorWeak: false,
 
-  title: 'Ant Design Pro',
+  title: '智驭数据',
   pwa: true,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: 'https://img2.imgtp.com/2024/05/08/oJhMpaBu.svg',
   iconfontUrl: '',
   token: {
     // 参见ts声明，demo 见文档，通过token 修改样式

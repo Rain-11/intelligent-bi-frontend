@@ -55,6 +55,21 @@ export async function sendVerificationCode(
   });
 }
 
+/** 用户登录 POST /user/emailVerificationCodeLogin */
+export async function emailVerificationCodeLogin(
+  body: API.UserLoginEmailRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseLoginUserVO>('/user/emailVerificationCodeLogin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** 忘记密码 POST /user/forgotPassword */
 export async function forgotPasswordDto(
   body: API.ForgotPasswordDto,

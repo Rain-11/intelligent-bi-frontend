@@ -204,6 +204,11 @@ declare namespace API {
     userRole?: string;
   };
 
+  type UserLoginEmailRequest = {
+    email?: string;
+    verificationCode?: string;
+  };
+
   type UserLoginRequest = {
     email?: string;
     userPassword?: string;

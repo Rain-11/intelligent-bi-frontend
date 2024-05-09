@@ -27,6 +27,7 @@ interface ResponseStructure {
 export const requestConfig: RequestConfig = {
   baseURL: 'http://localhost:8080',
   // 错误处理： umi@3 的错误处理方案。
+  withCredentials: true,
   errorConfig: {
     // 错误抛出
     errorThrower: (res: any) => {
@@ -90,8 +91,9 @@ export const requestConfig: RequestConfig = {
   requestInterceptors: [
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
-      const url = config?.url?.concat('?token = 123');
-      return { ...config, url };
+      /*       const url = config?.url?.concat('?token = 123');
+      return { ...config, url }; */
+      return config;
     },
   ],
 
