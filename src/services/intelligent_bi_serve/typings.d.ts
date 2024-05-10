@@ -5,6 +5,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseDataAnalysisVo = {
+    code?: number;
+    data?: DataAnalysisVo;
+    message?: string;
+  };
+
   type BaseResponseInteger = {
     code?: number;
     data?: number;
@@ -67,10 +73,17 @@ declare namespace API {
 
   type ChartAddDto = {
     goal?: string;
+    name?: string;
     chartData?: string;
     chartType?: string;
     genChart?: string;
     genResult?: string;
+  };
+
+  type ChartAnalysisDto = {
+    goal?: string;
+    name?: string;
+    chartType?: string;
   };
 
   type ChartQueryDto = {
@@ -79,6 +92,7 @@ declare namespace API {
     sortField?: string;
     sortOrder?: string;
     id?: number;
+    name?: string;
     goal?: string;
     chartType?: string;
     userId?: number;
@@ -86,6 +100,7 @@ declare namespace API {
 
   type ChartUpdateDto = {
     id?: number;
+    name?: string;
     goal?: string;
     chartData?: string;
     chartType?: string;
@@ -98,11 +113,17 @@ declare namespace API {
     goal?: string;
     chartData?: string;
     chartType?: string;
+    name?: string;
     genChart?: string;
     userId?: number;
     genResult?: string;
     updateTime?: string;
     createTime?: string;
+  };
+
+  type DataAnalysisVo = {
+    option?: string;
+    result?: string;
   };
 
   type DeleteRequest = {
@@ -131,6 +152,10 @@ declare namespace API {
     userRole?: string;
     createTime?: string;
     updateTime?: string;
+  };
+
+  type obtainAnalysisResultsParams = {
+    chartAnalysisDto: ChartAnalysisDto;
   };
 
   type OrderItem = {

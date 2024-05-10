@@ -15,7 +15,7 @@ import {
 import { Helmet, history, useModel } from '@umijs/max';
 import { Button, Form, FormProps, Input, Modal, Tabs, message } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
 const useStyles = createStyles(({ token }) => {
@@ -97,7 +97,7 @@ const Login: React.FC = () => {
           ...values,
         });
       }
-      if (res.code === 20000) {
+      if (res?.code === 20000) {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
@@ -105,7 +105,7 @@ const Login: React.FC = () => {
         history.push(urlParams.get('redirect') || '/');
         return;
       }
-      console.log(res.message);
+      console.log(res?.message);
       // 如果失败去设置用户错误信息
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
@@ -113,16 +113,6 @@ const Login: React.FC = () => {
       message.error(defaultLoginFailureMessage);
     }
   };
-
-  useEffect(() => {
-    console.log(
-      JSON.stringify(
-        JSON.parse(
-          '\n\n{\n  "tooltip": {\n    "trigger": "item"\n  },\n  "legend": {\n    "orient": "vertical",\n    "left": "left"\n  },\n  "series": [\n    {\n      "name": "用户增长数",\n      "type": "pie",\n      "radius": "50%",\n      "data": [\n        {"value": 10, "name": "1号"},\n        {"value": 20, "name": "2号"},\n        {"value": 30, "name": "3号"}\n      ],\n      "emphasis": {\n        "itemStyle": {\n          "shadowBlur": 10,\n          "shadowOffsetX": 0,\n          "shadowColor": "rgba(0, 0, 0, 0.5)"\n        }\n      }\n    }\n  ]\n}\n\n',
-        ),
-      ),
-    );
-  }, []);
 
   const showModal = () => {
     setIsModalOpen(true);
