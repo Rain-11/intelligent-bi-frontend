@@ -7,22 +7,29 @@ import {
   Divider,
   Empty,
   Form,
+  GetProp,
   Input,
   Row,
   Select,
   Space,
   Upload,
+  UploadProps,
   message,
 } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import ReactECharts from 'echarts-for-react';
 import { useState } from 'react';
 const Chart: React.FC = () => {
+  type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
   const [option, setOption] = useState(undefined);
   const [chartResult, setChartResult] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const onFinish = async (values: any) => {
     try {
+      if (values.file.fileList.length > 1) {
+        message.error('每次只能上传一个文件');
+        return;
+      }
       if (loading) {
         return;
       }
@@ -33,6 +40,7 @@ const Chart: React.FC = () => {
           file: undefined,
         },
         { file: values.file.file.originFileObj },
+        { headers: { 'Content-Type': 'multipart/form-data' } },
       );
 
       if (res.code === 20000) {
@@ -48,6 +56,19 @@ const Chart: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const beforeUpload = (file: FileType) => {
+    const isJpgOrPng =
+      file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    if (!isJpgOrPng) {
+      message.error('请上传表格文件!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('文件大于 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
   };
 
   return (
@@ -91,8 +112,12 @@ const Chart: React.FC = () => {
                 ></Select>
               </Form.Item>
 
-              <Form.Item name="file" label="待分析数据" extra="请上传csv格式文件">
-                <Upload name="file">
+              <Form.Item
+                name="file"
+                label="待分析数据"
+                extra="请上传csv格式文件，且文件大小不超过2MB"
+              >
+                <Upload name="file" maxCount={1} beforeUpload={beforeUpload}>
                   <Button icon={<UploadOutlined />}>上传csv文件</Button>
                 </Upload>
               </Form.Item>

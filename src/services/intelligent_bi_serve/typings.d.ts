@@ -98,6 +98,15 @@ declare namespace API {
     userId?: number;
   };
 
+  type ChartSearchNameAndGoalDto = {
+    current?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    name?: string;
+    goal?: string;
+  };
+
   type ChartUpdateDto = {
     id?: number;
     name?: string;

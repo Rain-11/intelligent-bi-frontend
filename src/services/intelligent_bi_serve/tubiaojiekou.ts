@@ -48,12 +48,27 @@ export async function obtainAnalysisResults(
   return request<API.BaseResponseDataAnalysisVo>('/chart/obtainAnalysisResults', {
     method: 'POST',
     headers: {
-      'Content-Type': 'multipart/form-data',
+      'Content-Type': 'application/json',
     },
     params: {
       ...params,
       chartAnalysisDto: undefined,
       ...params['chartAnalysisDto'],
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** 此处后端没有提供注释 POST /chart/searchChartByNameAndGoal */
+export async function searchChartByNameAndGoal(
+  body: API.ChartSearchNameAndGoalDto,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePageChartVo>('/chart/searchChartByNameAndGoal', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
     data: body,
     ...(options || {}),
