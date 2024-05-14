@@ -6,7 +6,8 @@ export default [
   },
   { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
   { path: '/chart', name: '图表分析', icon: 'barChart', component: './Chart' },
-  { path: '/chart_list', name: '图表列表', icon: 'orderedList', component: './ChartList' },
+  { path: '/chart_async', name: '图表分析(异步)', icon: 'barChart', component: './ChartAsync' },
+  { path: '/chart_list', name: '我的图标', icon: 'orderedList', component: './ChartList' },
   {
     path: '/admin',
     name: '管理页',

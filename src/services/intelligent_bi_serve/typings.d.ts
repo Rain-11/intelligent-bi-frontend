@@ -128,6 +128,8 @@ declare namespace API {
     genResult?: string;
     updateTime?: string;
     createTime?: string;
+    status?: number;
+    executionInformation?: string;
   };
 
   type DataAnalysisVo = {
@@ -161,6 +163,10 @@ declare namespace API {
     userRole?: string;
     createTime?: string;
     updateTime?: string;
+  };
+
+  type obtainAnalysisResultsAsyncParams = {
+    chartAnalysisDto: ChartAnalysisDto;
   };
 
   type obtainAnalysisResultsParams = {

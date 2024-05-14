@@ -64,7 +64,9 @@ const ChartList: React.FC = () => {
           <List.Item
             key={item.id}
             extra={
-              <ReactECharts style={{ width: 500 }} option={JSON.parse(item.genChart as string)} />
+              item.status === 1 && (
+                <ReactECharts style={{ width: 500 }} option={JSON.parse(item.genChart as string)} />
+              )
             }
           >
             <List.Item.Meta
