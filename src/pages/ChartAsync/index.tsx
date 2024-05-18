@@ -1,4 +1,4 @@
-import { obtainAnalysisResultsAsync } from '@/services/intelligent_bi_serve/tubiaojiekou';
+import { obtainAnalysisResultsAsyncMq } from '@/services/intelligent_bi_serve/tubiaojiekou';
 import { UploadOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -29,7 +29,7 @@ const ChartAsync: React.FC = () => {
         return;
       }
       setLoading(true);
-      const res = await obtainAnalysisResultsAsync(
+      const res = await obtainAnalysisResultsAsyncMq(
         {
           ...values,
           file: undefined,

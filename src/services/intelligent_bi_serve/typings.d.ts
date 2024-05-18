@@ -165,6 +165,10 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type obtainAnalysisResultsAsyncMQParams = {
+    chartAnalysisDto: ChartAnalysisDto;
+  };
+
   type obtainAnalysisResultsAsyncParams = {
     chartAnalysisDto: ChartAnalysisDto;
   };

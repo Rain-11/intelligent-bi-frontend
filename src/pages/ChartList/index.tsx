@@ -1,9 +1,15 @@
 import { listChart, searchChartByNameAndGoal } from '@/services/intelligent_bi_serve/tubiaojiekou';
 import { useModel } from '@umijs/max';
-import { Avatar, Card, List, message } from 'antd';
+import { Avatar, Card, Empty, List, message } from 'antd';
 import Search, { SearchProps } from 'antd/lib/input/Search';
 import ReactECharts from 'echarts-for-react';
 import { useEffect, useState } from 'react';
+enum ChartEnum {
+  '排队中' = 0,
+  '已完成' = 1,
+  '执行中' = 2,
+  '任务失败' = 3,
+}
 const ChartList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const initSearchParams: API.ChartQueryDto = {
@@ -20,7 +26,7 @@ const ChartList: React.FC = () => {
       if (res.code === 20000) {
         setData(res.data?.records as API.ChartVo[]);
         setTotal(res.data?.total as number);
-        console.log(total);
+        console.log(res);
       }
     } catch (error) {
       console.log(error);
@@ -64,8 +70,18 @@ const ChartList: React.FC = () => {
           <List.Item
             key={item.id}
             extra={
-              item.status === 1 && (
+              item.status === 1 ? (
                 <ReactECharts style={{ width: 500 }} option={JSON.parse(item.genChart as string)} />
+              ) : (
+                <Empty
+                  image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                  imageStyle={{ height: '100%', width: 500, paddingTop: 50 }}
+                  description={
+                    <span>
+                      <a href="#API">{ChartEnum[item.status as number]}</a>
+                    </span>
+                  }
+                ></Empty>
               )
             }
           >
